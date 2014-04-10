@@ -1,7 +1,4 @@
-#================================================
-#     Macro file for hadr01
-#     06.06.2006 V.Ivanchneko
-#================================================
+##### MACRO TO RUN THE SIMULATION ###########
 /control/verbose 2
 /run/verbose 1
 /tracking/verbose 0
@@ -21,7 +18,6 @@
 #/testhadr/Physics          PHYSLIST
 #
 /run/initialize
-#/testhadr/HistoName        p_pb_20GeV
 /testhadr/MaxEdep          10 GeV
 #
 /outputrec/FileName         Tungsten_photon_2112	
