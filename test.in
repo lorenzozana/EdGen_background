@@ -1,0 +1,34 @@
+#================================================
+#     Macro file for hadr01
+#     06.06.2006 V.Ivanchneko
+#================================================
+/control/verbose 2
+/run/verbose 1
+/tracking/verbose 0
+#
+/testhadr/TargetMat        G4_W
+/testhadr/TargetRadius     10.0 cm
+/testhadr/TargetLength     40.0 cm
+/testhadr/WindowMat        G4_Galactic
+/testhadr/WindowThick_r    0.01 cm 
+/testhadr/WindowThick_z    0.012 cm
+/testhadr/NumberDivZ       1
+/testhadr/PrintModulo      100000
+/testhadr/Update
+/testhadr/CutsAll          0.7 mm
+/testhadr/InChain          Photon
+/testhadr/Infile           test_collimator_photon.root
+#/testhadr/Physics          PHYSLIST
+#
+/run/initialize
+#/testhadr/HistoName        p_pb_20GeV
+/testhadr/MaxEdep          10 GeV
+#
+/outputrec/FileName         Tungsten_photon_2112	
+/outputrec/Particle         1 2112			    
+#/gun/particle gamma
+#/random/setSeeds  1332361481 1332361481
+#/gun/energy 8. GeV
+#/gun/energy 40. GeV
+/run/beamOn 10000000
+#
