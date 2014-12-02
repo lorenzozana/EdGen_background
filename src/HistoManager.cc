@@ -50,9 +50,9 @@ HistoManager::HistoManager()
   nSlices   = 300;
   nBinsE    = 100;
   nHisto    = 25;
-  length    = 300.*mm;
-  radius    = 1.*cm;
-  edepMax   = 1.0*GeV;
+  length    = 300.*CLHEP::mm;
+  radius    = 1.*CLHEP::cm;
+  edepMax   = 1.0*CLHEP::GeV;
   beamFlag  = true;
   material  = 0;
   elm       = 0;
@@ -264,10 +264,10 @@ void HistoManager::EndOfRun()
   G4cout                         << "Beam particle                        "
 				 << primaryDef->GetParticleName() <<G4endl;
   G4cout                         << "Beam Energy(MeV)                     " 
-				 << primaryKineticEnergy/MeV <<G4endl;
+				 << primaryKineticEnergy/CLHEP::MeV <<G4endl;
   G4cout                         << "Number of events                     " << n_evt <<G4endl;
-  G4cout << std::setprecision(4) << "Average energy deposit (MeV)         " << edepSum/MeV 
-	 << "   RMS(MeV) " << edepSum2/MeV << G4endl;
+  G4cout << std::setprecision(4) << "Average energy deposit (MeV)         " << edepSum/CLHEP::MeV 
+	 << "   RMS(MeV) " << edepSum2/CLHEP::MeV << G4endl;
   G4cout << std::setprecision(4) << "Average number of steps              " << xs << G4endl;
   G4cout << std::setprecision(4) << "Average number of gamma              " << xg << G4endl;
   G4cout << std::setprecision(4) << "Average number of e-                 " << xe << G4endl;
@@ -340,15 +340,15 @@ void HistoManager::ScoreNewTrack(const G4Track* track)
   G4ThreeVector momentum = track->GetMomentum();
 
   track_id = track->GetParentID();
-  ener = e/MeV; // MeV
+  ener = e/CLHEP::MeV; // MeV
   
-  mom_x = momentum.x()/MeV;
-  mom_y = momentum.y()/MeV;
-  mom_z = momentum.z()/MeV;
-  vert_x = vertex.x()/cm;
-  vert_y = vertex.y()/cm;
-  vert_z = vertex.z()/cm;
-  mass = pd->GetPDGMass()/MeV ; // mass in MeV
+  mom_x = momentum.x()/CLHEP::MeV;
+  mom_y = momentum.y()/CLHEP::MeV;
+  mom_z = momentum.z()/CLHEP::MeV;
+  vert_x = vertex.x()/CLHEP::cm;
+  vert_y = vertex.y()/CLHEP::cm;
+  vert_z = vertex.z()/CLHEP::cm;
+  mass = pd->GetPDGMass()/CLHEP::MeV ; // mass in MeV
   // G4cout << "Event n" << n_evt << "  Track id=" << track_id << G4endl;
   
  
@@ -363,9 +363,9 @@ void HistoManager::ScoreNewTrack(const G4Track* track)
     G4ThreeVector dir = track->GetMomentumDirection();
     if(1 < verbose) 
       G4cout << "### Primary " << name 
-	     << " kinE(MeV)= " << e/MeV
-	     << "; m(MeV)= " << pd->GetPDGMass()/MeV
-	     << "; pos(mm)= " << track->GetPosition()/mm 
+	     << " kinE(MeV)= " << e/CLHEP::MeV
+	     << "; m(MeV)= " << pd->GetPDGMass()/CLHEP::MeV
+	     << "; pos(mm)= " << track->GetPosition()/CLHEP::mm 
 	     << ";  dir= " << track->GetMomentumDirection() 
 	     << G4endl;
     //   fTree->Fill(); // Fill the main Tree, so I can have the information on the beam, and the event number
@@ -373,12 +373,12 @@ void HistoManager::ScoreNewTrack(const G4Track* track)
   } else {
     if(1 < verbose) 
       G4cout << "=== Secondary " << name 
-	     << " kinE(MeV)= " << e/MeV
-	     << "; m(MeV)= " << pd->GetPDGMass()/MeV
-	     << "; pos(mm)= " << track->GetPosition()/mm 
+	     << " kinE(MeV)= " << e/CLHEP::MeV
+	     << "; m(MeV)= " << pd->GetPDGMass()/CLHEP::MeV
+	     << "; pos(mm)= " << track->GetPosition()/CLHEP::mm 
 	     << ";  dir= " << track->GetMomentumDirection() 
 	     << G4endl;
-    e = std::log10(e/MeV);
+    e = std::log10(e/CLHEP::MeV);
     if(pd == G4Gamma::Gamma()) {
       n_gam++;
       part_id = 22;
@@ -495,11 +495,11 @@ void HistoManager::AddTargetStep(const G4Step* step)
     }
 
     if(1 < verbose) 
-      G4cout << "HistoManager::AddEnergy: e(keV)= " << edep/keV
-	     << "; z(mm)= " << z/mm
-	     << "; step(mm)= " << step->GetStepLength()/mm
+      G4cout << "HistoManager::AddEnergy: e(keV)= " << edep/CLHEP::keV
+	     << "; z(mm)= " << z/CLHEP::mm
+	     << "; step(mm)= " << step->GetStepLength()/CLHEP::mm
 	     << " by " << currentDef->GetParticleName()
-	     << " E(MeV)= " << currentKinEnergy/MeV
+	     << " E(MeV)= " << currentKinEnergy/CLHEP::MeV
 	     << G4endl;
   }
 }
@@ -540,11 +540,11 @@ void HistoManager::AddWindowStep(const G4Step* step)
     }
 
     if(1 < verbose) 
-      G4cout << "HistoManager::AddEnergy: e(keV)= " << edep/keV
-	     << "; z(mm)= " << z/mm
-	     << "; step(mm)= " << step->GetStepLength()/mm
+      G4cout << "HistoManager::AddEnergy: e(keV)= " << edep/CLHEP::keV
+	     << "; z(mm)= " << z/CLHEP::mm
+	     << "; step(mm)= " << step->GetStepLength()/CLHEP::mm
 	     << " by " << currentDef->GetParticleName()
-	     << " E(MeV)= " << currentKinEnergy/MeV
+	     << " E(MeV)= " << currentKinEnergy/CLHEP::MeV
 	     << G4endl;
   }
 }
@@ -554,7 +554,7 @@ void HistoManager::AddWindowStep(const G4Step* step)
 void HistoManager::AddLeakingParticle(const G4Track* track)
 {
   const G4ParticleDefinition* pd = track->GetDefinition(); 
-  G4double e = std::log10(track->GetKineticEnergy()/MeV);
+  G4double e = std::log10(track->GetKineticEnergy()/CLHEP::MeV);
 
   G4ThreeVector pos = track->GetPosition();
   G4ThreeVector dir = track->GetMomentumDirection();
@@ -567,14 +567,14 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
   G4ThreeVector momentum = track->GetMomentum();
 
   track_id = track->GetParentID();
-  ener = track->GetKineticEnergy()/MeV; // MeV
-  ener_vert = track->GetVertexKineticEnergy()/MeV; // MeV
-  mom_x = momentum.x()/MeV;
-  mom_y = momentum.y()/MeV;
-  mom_z = momentum.z()/MeV;
-  vert_x = vertex.x()/cm;
-  vert_y = vertex.y()/cm;
-  vert_z = vertex.z()/cm;
+  ener = track->GetKineticEnergy()/CLHEP::MeV; // MeV
+  ener_vert = track->GetVertexKineticEnergy()/CLHEP::MeV; // MeV
+  mom_x = momentum.x()/CLHEP::MeV;
+  mom_y = momentum.y()/CLHEP::MeV;
+  mom_z = momentum.z()/CLHEP::MeV;
+  vert_x = vertex.x()/CLHEP::cm;
+  vert_y = vertex.y()/CLHEP::cm;
+  vert_z = vertex.z()/CLHEP::cm;
   part_id=pd->GetPDGEncoding();
   theta = momentum.theta();
   G4bool isLeaking = false;
@@ -747,7 +747,7 @@ G4double HistoManager::GetInDirectionZ()
 
 G4double HistoManager::GetInMomentum()
 {
-  G4ThreeVector pmom(in_px*MeV, in_py*MeV, in_pz*MeV);
+  G4ThreeVector pmom(in_px*CLHEP::MeV, in_py*CLHEP::MeV, in_pz*CLHEP::MeV);
   G4double mom = pmom.mag();
   // double mom = pow((pow(in_px,2)+pow(in_py,2)+pow(in_pz,2)),0.5);
   //  G4cout << "Momentum =" << mom << " in_px=" << in_px << " in_py=" << in_py << " in_pz=" << in_pz << G4endl;

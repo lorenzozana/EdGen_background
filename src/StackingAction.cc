@@ -39,11 +39,11 @@ StackingAction::ClassifyNewTrack(const G4Track* aTrack)
   if(histoManager->GetVerbose() > 1 ) {
     G4cout << "Track #"
 	   << aTrack->GetTrackID() << " of " << name
-	   << " E(MeV)= " << aTrack->GetKineticEnergy()/MeV
+	   << " E(MeV)= " << aTrack->GetKineticEnergy()/CLHEP::MeV
 	   << " produced by " 
 	   << histoManager->CurrentParticle()->GetParticleName()
 	   << " ID= " << aTrack->GetParentID()
-	   << " with E(MeV)= " << histoManager->CurrentKinEnergy()/MeV
+	   << " with E(MeV)= " << histoManager->CurrentKinEnergy()/CLHEP::MeV
 	   << G4endl;
   }
   if(aTrack->GetTrackID() == 1) return status;

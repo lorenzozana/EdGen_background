@@ -27,7 +27,7 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   if(histo->DefaultBeamPosition()) {
-    G4double zVertex = -(5.0*mm + histo->Length());
+    G4double zVertex = -(5.0*CLHEP::mm + histo->Length());
     particleGun->SetParticlePosition(G4ThreeVector(0.,0.,zVertex));
    
   }
