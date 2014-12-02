@@ -5,8 +5,8 @@ Background GEANT4 simulation for EdGeN (work in progress, integration with EdGen
 
 Prerequisites
 -------------
-* CERN ROOT  (tested at now with version ROOT 5.34/09
-* GEANT4 (at now the code is written for GEant4.9.6p02 before I will do further tests with the new PHYSICS LIST released with GEANT4.10.00, because it is totally changed the way that the electronuclear interaction is handled) 
+* CERN ROOT  (tested at now with version ROOT 5.34/09)
+* GEANT4 (master branch works with GEant4.9.6p02; Geant4.10 branch (git checkout Geant4.10) works with Geant4.10.00.p01 ) 
 * git 
 
 Running
@@ -60,4 +60,6 @@ see option inside src/PhysicsList.cc (or put your favourite one in your environm
  Output
 -----------
 * /outputrec/FileName         Tungsten_photon_2112 (Output (root format) base name for the output file (a random number will be added (and .root) )	
-* /outputrec/Particle         2 2112 211    (what you want to record in the output (ex. 2 (number of particles) 2112 211 (Particle ID (PDG) of the particle(s) recorded) ) ) 	
+* /outputrec/Particle         2 2112 211    (what you want to record in the output (ex. 2 (number of particles) 2112 211 (Particle ID (PDG) of the particle(s) recorded) ) REALLY IMPORTANT IF YOU NEED TO BUILD IN LOW CROSS SECTION PARTICLES (EXAMPLE: LOW SIZE OUTPUT FILE))
+
+ 	
