@@ -10,11 +10,11 @@
 /testhadr/WindowThick_r    0.01 cm 
 /testhadr/WindowThick_z    0.012 cm
 /testhadr/NumberDivZ       1
-/testhadr/PrintModulo      100000
+/testhadr/PrintModulo      100
 /testhadr/Update
 /testhadr/CutsAll          0.7 mm
-/testhadr/InChain          Photon
-/testhadr/Infile           test_collimator_photon.root
+#/testhadr/InChain          Photon
+#/testhadr/Infile           test_collimator_photon.root
 #/testhadr/Physics          PHYSLIST
 #
 /run/initialize
@@ -22,9 +22,9 @@
 #
 /outputrec/FileName         Tungsten_photon_2112	
 /outputrec/Particle         1 2112			    
-#/gun/particle gamma
+/gun/particle gamma
 #/random/setSeeds  1332361481 1332361481
-#/gun/energy 8. GeV
+/gun/energy 8. GeV
 #/gun/energy 40. GeV
-/run/beamOn 10000000
+/run/beamOn 1000
 #
