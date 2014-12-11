@@ -1,9 +1,9 @@
 
 #include "PrimaryGeneratorAction.hh"
 #include "G4ParticleGun.hh"
-#include "G4ParticleDefinition.hh"`
+#include "G4ParticleDefinition.hh"
 #include "HistoManager.hh"
-
+#include "Randomize.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -27,8 +27,10 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   if(histo->DefaultBeamPosition()) {
+    G4double vertex_x = (-0.25*cm + (0.5*cm*(G4UniformRand() )));
+    G4double vertex_y = (-0.25*cm + (0.5*cm*(G4UniformRand() )));
     G4double zVertex = -(5.0*mm + histo->Length());
-    particleGun->SetParticlePosition(G4ThreeVector(0.,0.,zVertex));
+    particleGun->SetParticlePosition(G4ThreeVector(vertex_x,vertex_y,zVertex));
    
   }
   if(histo->DefaultInFile()) {
