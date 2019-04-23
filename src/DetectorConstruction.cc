@@ -155,6 +155,7 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   G4double abundance;
   G4double density;
   G4double temp = 22.0*CLHEP::kelvin;
+  G4double templh2 = 20.27*CLHEP::kelvin;
   // G4double press = 2.116*atmosphere;
   G4int nComponents;
   G4String symbol;
@@ -170,6 +171,10 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   LD2->AddElement(elD, natoms=2); //sum of frac. masses 2 is not 1?
   // LD2->AddElement(elD, natoms=1);
 
+  //Constriction of LH2 cell
+  elH  = new G4Element("Hydrogen",symbol="elH",  zz= 1, aa= 1.00794*CLHEP::g/CLHEP::mole);
+  LH2 = new G4Material("H2Liquid",density= 0.0708*CLHEP::g/CLHEP::cm3 , nComponents=1,kStateLiquid, templh2 );
+  LH2->AddElement(elH, natoms = 2);
 
   // Constructing He3 cell for SIDIS
  

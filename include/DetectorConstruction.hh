@@ -58,6 +58,9 @@ private:
   G4Isotope* D;
   G4Element* elD;
   G4Material* LD2;
+  G4Element* elH;
+  G4Material* LH2;
+  
 
 };
 
