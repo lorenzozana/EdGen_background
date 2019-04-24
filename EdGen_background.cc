@@ -2,6 +2,8 @@
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "Randomize.hh"
+#include "globals.hh"
+
 
 #include "DetectorConstruction.hh"
 #include "PhysicsList.hh"

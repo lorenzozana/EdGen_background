@@ -11,9 +11,9 @@ set(useROOT true)        # use true or false
 #
 option(WITH_GEANT4_UIVIS "Build example with Geant4 UI and Vis drivers" ON)
 if(WITH_GEANT4_UIVIS)
-  find_package(Geant4 REQUIRED ui_all vis_all gdml)
+  find_package(Geant4 REQUIRED ui_all vis_all)
 else()
-  find_package(Geant4 REQUIRED gdml)
+  find_package(Geant4 REQUIRED ui_all)
 endif()
 
 #----------------------------------------------------------------------------
@@ -22,7 +22,13 @@ endif()
 #
 include(FindROOT.cmake)
 include(${Geant4_USE_FILE})
-include_directories(${PROJECT_SOURCE_DIR}/include ${ROOT_INCLUDE_DIR} )
+include_directories(${PROJECT_SOURCE_DIR}/include ${ROOT_INCLUDE_DIR} ${Geant4_INCLUDE_DIR}
+ /home/zana/Geant4/geant4/source/processes/hadronic/models/chiral_inv_phase_space/body/include/ 
+ /home/zana/Geant4/geant4/source/processes/hadronic/models/chiral_inv_phase_space/cross_sections/include/
+ /home/zana/Geant4/geant4/source/processes/hadronic/models/low_energy/include/
+ /home/zana/Geant4/geant4/source/processes/hadronic/models/chiral_inv_phase_space/interface/include/
+/home/zana/Geant4/geant4/source/processes/hadronic/models/high_energy/include/
+ )
 set(LINK_DIRECTORIES
 ${ROOT_LIBRARY_DIR}
 )

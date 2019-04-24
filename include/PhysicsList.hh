@@ -37,13 +37,13 @@ private:
   void SetBuilderList3();
   void SetBuilderList4();
 
-  G4double cutForGamma;
-  G4double cutForElectron;
-  G4double cutForPositron;
-  G4double cutForProton;
+  G4double fCutForGamma;
+  G4double fCutForElectron;
+  G4double fCutForPositron;
+  G4double fCutForProton;
 
-  G4VPhysicsConstructor*  emPhysicsList;
-  G4VPhysicsConstructor*  particleList;
+  G4VPhysicsConstructor*  fEmPhysicsList;
+  G4VPhysicsConstructor*  fParticleList;
   std::vector<G4VPhysicsConstructor*>  hadronPhys;
     
   PhysicsListMessenger* pMessenger;
