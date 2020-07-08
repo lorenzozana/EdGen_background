@@ -698,6 +698,11 @@ void HistoManager::SetInFileName(const char* val2)
 void HistoManager::ReadInFileName()
 {
   input_source_chain.GetEntry(atentry);
+  //  G4cout << "at entry=" << atentry << " in_px=" << in_px << " in_py=" << in_py << " in_pz=" << in_pz << G4endl;
+
+  //  in_pz = 8000;
+  //  G4cout << " in_px=" << in_px << " in_py=" << in_py << " in_pz=" << in_pz << G4endl;
+
   atentry++;
 
 }

@@ -60,6 +60,9 @@ private:
   G4Material* LD2;
   G4Element* elH;
   G4Material* LH2;
+  G4Material* LH2fake;
+  G4Element* elHe;
+  G4Material* LHe4;
   
 
 };

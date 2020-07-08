@@ -175,6 +175,8 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   elH  = new G4Element("Hydrogen",symbol="elH",  zz= 1, aa= 1.00794*CLHEP::g/CLHEP::mole);
   LH2 = new G4Material("H2Liquid",density= 0.0708*CLHEP::g/CLHEP::cm3 , nComponents=1,kStateLiquid, templh2 );
   LH2->AddElement(elH, natoms = 2);
+  LH2fake = new G4Material("H2LiquidFake",density= 0.169*CLHEP::g/CLHEP::cm3 , nComponents=1,kStateLiquid, templh2 );
+  LH2fake->AddElement(elH, natoms = 2);
 
   // Constructing He3 cell for SIDIS
  
@@ -186,6 +188,9 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   //0.1345=44.6(amg=mol/m3)*3.016(g/mol)
   He3_10amg->AddElement( He3, 100.0*CLHEP::perCent );
   
+  elHe =  new G4Element("Helium",    "He", zz=2,  aa=4.0026*CLHEP::g/CLHEP::mole);
+  LHe4 =  new G4Material( "LHe4",  density = 0.145*CLHEP::g/CLHEP::cm3,nComponents=1, kStateLiquid, temp);
+  LHe4->AddElement( elHe, 100.0*CLHEP::perCent );
   
   // search the material by its name
   G4Material* material = G4NistManager::Instance()->FindOrBuildMaterial(mat);
