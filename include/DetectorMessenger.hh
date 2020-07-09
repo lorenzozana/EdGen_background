@@ -32,6 +32,7 @@ private:
   G4UIcmdWithAString*        matCmd;
   G4UIcmdWithAString*        mat1Cmd;
   G4UIcmdWithAString*        mat2Cmd;
+  G4UIcmdWithAString*        gdmlfileCmd;
   G4UIcmdWithADoubleAndUnit* rCmd;
   G4UIcmdWithADoubleAndUnit* lCmd;
   G4UIcmdWithADoubleAndUnit* rCmd2;

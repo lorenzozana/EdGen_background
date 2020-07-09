@@ -34,6 +34,11 @@ DetectorMessenger::DetectorMessenger(DetectorConstruction * Det)
   mat2Cmd->SetParameterName("windMaterial",false);
   mat2Cmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
+  gdmlfileCmd = new G4UIcmdWithAString("/testhadr/GdmlFile",this);
+  gdmlfileCmd->SetGuidance("Select Gdml file");
+  gdmlfileCmd->SetParameterName("gdmlfile",false);
+  gdmlfileCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
   rCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/TargetRadius",this);
   rCmd->SetGuidance("Set radius of the target");
   rCmd->SetParameterName("radius",false);
@@ -101,6 +106,7 @@ DetectorMessenger::~DetectorMessenger()
   delete matCmd;
   delete mat1Cmd;
   delete mat2Cmd;
+  delete gdmlfileCmd;
   delete rCmd;
   delete lCmd;
   delete rCmd2;
@@ -123,6 +129,8 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   else if( command == mat1Cmd )
     Detector->SetWorldMaterial(newValue);
   else if( command == mat2Cmd )
+    Detector->SetWindowMaterial(newValue);
+  else if( command == gdmlfileCmd )
     Detector->SetWindowMaterial(newValue);
   else if( command == rCmd ) 
     Detector->SetTargetRadius(rCmd->GetNewDoubleValue(newValue));
