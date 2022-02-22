@@ -178,6 +178,9 @@ fTree->Branch("en_protdepwd_beam", &en_protdepwd_beam, "en_protdepwd_beam/D") ; 
  tTree->Branch("mom_x", &mom_x, "mom_x/D");
  tTree->Branch("mom_y", &mom_y, "mom_y/D");
  tTree->Branch("mom_z", &mom_z, "mom_z/D");
+ tTree->Branch("leak_x", &leak_x , "leak_x/D");
+ tTree->Branch("leak_y", &leak_y, "leak_y/D");
+ tTree->Branch("leak_z", &leak_z, "leak_z/D");
  tTree->Branch("part_id", &part_id, "part_id/I") ;  
 }
 
@@ -575,6 +578,9 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
   vert_x = vertex.x()/CLHEP::cm;
   vert_y = vertex.y()/CLHEP::cm;
   vert_z = vertex.z()/CLHEP::cm;
+  leak_x = x/CLHEP::cm;
+  leak_y = y/CLHEP::cm;
+  leak_z = z/CLHEP::cm;
   part_id=pd->GetPDGEncoding();
   theta = momentum.theta();
   G4bool isLeaking = false;

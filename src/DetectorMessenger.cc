@@ -67,6 +67,13 @@ DetectorMessenger::DetectorMessenger(DetectorConstruction * Det)
   lCmd2->SetRange("wthick>0");
   lCmd2->AvailableForStates(G4State_PreInit,G4State_Idle);
 
+  bsizeCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/BeamSize",this);
+  bsizeCmd->SetGuidance("Set Beam Size");
+  bsizeCmd->SetParameterName("bsize",false);
+  bsizeCmd->SetUnitCategory("Length");
+  bsizeCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+
   binCmd = new G4UIcmdWithAnInteger("/testhadr/NumberOfBinsE",this);
   binCmd->SetGuidance("Set number of bins for Energy");
   binCmd->SetParameterName("NEbins",false);
@@ -111,6 +118,7 @@ DetectorMessenger::~DetectorMessenger()
   delete lCmd;
   delete rCmd2;
   delete lCmd2;
+  delete bsizeCmd;
   delete nOfAbsCmd;
   delete updateCmd;
   delete testDir;
@@ -140,6 +148,8 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     h->SetWindowThick_r(rCmd2->GetNewDoubleValue(newValue));
   else if( command == lCmd2 ) 
     h->SetWindowThick_z(lCmd2->GetNewDoubleValue(newValue));
+  else if( command == bsizeCmd ) 
+    h->SetBeamSize(bsizeCmd->GetNewDoubleValue(newValue));
   else if( command == nOfAbsCmd ) 
     h->SetNumberOfSlices(nOfAbsCmd->GetNewIntValue(newValue));
   else if( command == binCmd ) 

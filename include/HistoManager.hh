@@ -58,12 +58,14 @@ public:
   void AddLeakingParticle(const G4Track*);
 
   void SetTargetLength(G4double val)            {length  = val;};
+  void SetBeamSize(G4double val)                {beamsize  = val;};
   void SetWindowThick_r(G4double val)           {thick_r  = val;};
   void SetWindowThick_z(G4double val)           {thick_z  = val;};
   void SetNumberOfSlices(G4int val)             {nSlices = val;};
   void SetNumberOfBinsE(G4int val)              {nBinsE  = val;};
 
   G4double Length()         const               {return length;};
+  G4double BeamSize()         const             {return beamsize;};
   G4double Thick_r()         const              {return thick_r;};
   G4double Thick_z()         const              {return thick_z;};
   G4int    NumberOfSlices() const               {return nSlices;};
@@ -144,6 +146,7 @@ private:
   G4double edepSum2;
   G4double beamEnergy;
   G4double length;
+  G4double beamsize;
   G4double radius;
   G4double thick_r;
   G4double thick_z;
@@ -196,6 +199,9 @@ private:
   double vert_x;
   double vert_y;
   double vert_z;
+  double leak_x;
+  double leak_y;
+  double leak_z;
   double mass;
   double neutron_ener;
   double neutron_theta;
