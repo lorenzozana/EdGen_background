@@ -59,6 +59,7 @@ public:
 
   void SetTargetLength(G4double val)            {length  = val;};
   void SetBeamSize(G4double val)                {beamsize  = val;};
+  void SetBeamType(G4int val)                   {beamtype  = val;};
   void SetWindowThick_r(G4double val)           {thick_r  = val;};
   void SetWindowThick_z(G4double val)           {thick_z  = val;};
   void SetNumberOfSlices(G4int val)             {nSlices = val;};
@@ -66,6 +67,7 @@ public:
 
   G4double Length()         const               {return length;};
   G4double BeamSize()         const             {return beamsize;};
+  G4int    BeamType()         const             {return beamtype;};
   G4double Thick_r()         const              {return thick_r;};
   G4double Thick_z()         const              {return thick_z;};
   G4int    NumberOfSlices() const               {return nSlices;};
@@ -160,6 +162,7 @@ private:
   G4int nBinsE;
   G4int nSlices;
 
+  G4int beamtype;
   G4int n_evt;
   G4int n_elec;
   G4int n_posit;

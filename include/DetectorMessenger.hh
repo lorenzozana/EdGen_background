@@ -38,6 +38,7 @@ private:
   G4UIcmdWithADoubleAndUnit* rCmd2;
   G4UIcmdWithADoubleAndUnit* lCmd2;
   G4UIcmdWithADoubleAndUnit* bsizeCmd;
+  G4UIcmdWithAnInteger*      btypeCmd;
   G4UIcmdWithADoubleAndUnit* edepCmd;
   G4UIcmdWithAnInteger*      binCmd;
   G4UIcmdWithAnInteger*      nOfAbsCmd;

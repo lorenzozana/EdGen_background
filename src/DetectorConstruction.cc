@@ -129,9 +129,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
          << "  Total Length(mm)= " << 2.0*targetZ/CLHEP::mm
          <<  "  ###" << G4endl;
 
-  // colors
   G4VisAttributes zero = G4VisAttributes::Invisible;
   logicWorld->SetVisAttributes(&zero);
+
+  //  logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
 
   G4VisAttributes regWcolor(G4Colour(0.3, 0.3, 0.3));
   logicCheck->SetVisAttributes(&regWcolor);
@@ -152,13 +153,13 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   G4int zz;
   G4int nn;
   G4int natoms;
+  G4String name,symbol;
   G4double abundance;
   G4double density;
   G4double temp = 22.0*CLHEP::kelvin;
   G4double templh2 = 20.27*CLHEP::kelvin;
   // G4double press = 2.116*atmosphere;
   G4int nComponents;
-  G4String symbol;
   G4int nIso;
   D  = new G4Isotope("Deuteron", zz=1, nn=2, aa= 2.0141018*CLHEP::g/CLHEP::mole);
   elD = new G4Element("Deuterium",symbol="elD", nIso = 1);
@@ -191,7 +192,8 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   elHe =  new G4Element("Helium",    "He", zz=2,  aa=4.0026*CLHEP::g/CLHEP::mole);
   LHe4 =  new G4Material( "LHe4",  density = 0.145*CLHEP::g/CLHEP::cm3,nComponents=1, kStateLiquid, temp);
   LHe4->AddElement( elHe, 100.0*CLHEP::perCent );
-  
+
+
   // search the material by its name
   G4Material* material = G4NistManager::Instance()->FindOrBuildMaterial(mat);
 
@@ -224,6 +226,8 @@ void DetectorConstruction::SetWindowMaterial(const G4String& mat)
   G4int zz;
   G4cout << "Setting window material to " << mat.data() << G4endl;
   G4double density;
+  G4String name,symbol;
+  G4double fractionmass;
 
   G4int nComponents;
   
@@ -253,6 +257,27 @@ void DetectorConstruction::SetWindowMaterial(const G4String& mat)
   Glass_GE180->AddMaterial(CalciumOxide, 6.5*CLHEP::perCent);
   Glass_GE180->AddMaterial(StrontiumOxide, 0.25*CLHEP::perCent);
 
+  elC = new G4Element(name="Carbon",symbol="C",zz=6.,aa=12.01*CLHEP::g/CLHEP::mole);
+  elO = new G4Element(name="Oxygen",symbol="O2",zz=8.,aa=16.*CLHEP::g/CLHEP::mole);
+  elNa = new G4Element(name="Sodium",symbol="Na",zz=11.,aa=22.99*CLHEP::g/CLHEP::mole);
+  elMg = new G4Element(name="Magnesium",symbol="Mg",zz=12.,aa=24.305*CLHEP::g/CLHEP::mole);
+  elAl = new G4Element(name="Aluminum",symbol="Al",zz=13.,aa=26.98*CLHEP::g/CLHEP::mole);
+  elSi = new G4Element(name="Silicon",symbol="Si",zz=14.,aa=28.085*CLHEP::g/CLHEP::mole);
+  elK = new G4Element(name="Potassium",symbol="K",zz=19.,aa=39.0983*CLHEP::g/CLHEP::mole);
+  elCa = new G4Element(name="Calcium",symbol="Ca",zz=20.,aa=40.08*CLHEP::g/CLHEP::mole);
+  elFe = new G4Element(name="Iron",symbol="Fe",zz=26.,aa=55.850*CLHEP::g/CLHEP::mole);
+
+  Portland = new G4Material("Portland",density = 2.3*CLHEP::g/CLHEP::cm3,nComponents=10 );
+  Portland->AddElement(elH,fractionmass=0.01);
+  Portland->AddElement(elC,fractionmass=0.001);
+  Portland->AddElement(elO,fractionmass=0.529107);
+  Portland->AddElement(elNa,fractionmass=0.016);
+  Portland->AddElement(elMg,fractionmass=0.002);
+  Portland->AddElement(elAl,fractionmass=0.033872);
+  Portland->AddElement(elSi,fractionmass=0.337021);
+  Portland->AddElement(elK,fractionmass=0.013);
+  Portland->AddElement(elCa,fractionmass=0.044);
+  Portland->AddElement(elFe,fractionmass=0.014);
 
   // search the material by its name
   G4Material* material = G4NistManager::Instance()->FindOrBuildMaterial(mat);

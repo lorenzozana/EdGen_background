@@ -63,7 +63,17 @@ private:
   G4Material* LH2fake;
   G4Element* elHe;
   G4Material* LHe4;
-  
+  G4Element* elC;
+  G4Element* elO;
+  G4Element* elNa;
+  G4Element* elMg;
+  G4Element* elAl;
+  G4Element* elSi;
+  G4Element* elK;
+  G4Element* elCa;
+  G4Element* elFe;
+  G4Material* Portland; //Variaty of Concrete
+
 
 };
 

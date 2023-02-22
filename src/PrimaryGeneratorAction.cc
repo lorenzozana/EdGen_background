@@ -30,9 +30,16 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4double zVertex = -(5.0*CLHEP::mm + histo->Length());
     G4double xvertex = histo->BeamSize();
     G4double yvertex = histo->BeamSize();
-    while (pow(xvertex*xvertex+yvertex*yvertex,0.5)> histo->BeamSize()) {
-      xvertex = histo->BeamSize() *G4UniformRand();
-      yvertex = histo->BeamSize() *G4UniformRand();
+    G4int btype = histo->BeamType();
+    if (btype == 1) {  // Pencil Beam shape
+      while (pow(xvertex*xvertex+yvertex*yvertex,0.5)> histo->BeamSize()) {
+	xvertex = histo->BeamSize() *G4UniformRand();
+	yvertex = histo->BeamSize() *G4UniformRand();
+      }
+    }
+    else { // Gaussian Beam Size
+      xvertex = G4RandGauss::shoot(0.,xvertex);
+      yvertex = G4RandGauss::shoot(0.,yvertex);
     }
     particleGun->SetParticlePosition(G4ThreeVector(xvertex,yvertex,zVertex));
    
