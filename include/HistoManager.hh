@@ -136,8 +136,8 @@ private:
   const G4ParticleDefinition* neutron;
   const G4Material*           material;
   const G4Material*           windmaterial;
-  G4Element*                  elm;
-  G4Element*                  windelm;
+  const G4Element*                  elm;
+  const G4Element*                  windelm;
 
   G4double edepMax;
   G4double edepEvt;

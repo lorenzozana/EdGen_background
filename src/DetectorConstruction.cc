@@ -129,10 +129,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
          << "  Total Length(mm)= " << 2.0*targetZ/CLHEP::mm
          <<  "  ###" << G4endl;
 
-  G4VisAttributes zero = G4VisAttributes::Invisible;
-  logicWorld->SetVisAttributes(&zero);
+  //  G4VisAttributes zero = G4VisAttributes::Invisible;
+  //  logicWorld->SetVisAttributes(&zero);
 
-  //  logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
+  logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
 
   G4VisAttributes regWcolor(G4Colour(0.3, 0.3, 0.3));
   logicCheck->SetVisAttributes(&regWcolor);

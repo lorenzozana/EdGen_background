@@ -651,7 +651,7 @@ void HistoManager::SetTargetMaterial(const G4Material* mat)
 {
   if(mat) {
     material = mat;
-    elm = (*(material->GetElementVector()))[0];
+    elm = material->GetElement(0);
   }
 }
 
