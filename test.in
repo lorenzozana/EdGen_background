@@ -12,10 +12,11 @@
 /testhadr/NumberDivZ       1
 /testhadr/PrintModulo      100
 /testhadr/Update
-/testhadr/CutsAll          0.7 mm
+#/testhadr/CutsAll          0.7 mm
 #/testhadr/InChain          Photon
 #/testhadr/Infile           test_collimator_photon.root
 #/testhadr/Physics          PHYSLIST
+/testhadr/Physics          QGSP_BERT_HP
 #
 /run/initialize
 /testhadr/MaxEdep          10 GeV
