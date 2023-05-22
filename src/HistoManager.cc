@@ -116,6 +116,7 @@ void HistoManager::bookHisto()
   fTree->Branch("vert_y", &vert_y, "vert_y/D");
   fTree->Branch("vert_z", &vert_z, "vert_z/D");
   fTree->Branch("mass", &mass, "mass/D");
+  fTree->Branch("density", &density, "density/D"); // density in g/cm3
 
 
 
@@ -181,6 +182,9 @@ fTree->Branch("en_protdepwd_beam", &en_protdepwd_beam, "en_protdepwd_beam/D") ; 
  tTree->Branch("leak_x", &leak_x , "leak_x/D");
  tTree->Branch("leak_y", &leak_y, "leak_y/D");
  tTree->Branch("leak_z", &leak_z, "leak_z/D");
+ tTree->Branch("norm_x", &norm_x , "norm_x/D");
+ tTree->Branch("norm_y", &norm_y, "norm_y/D");
+ tTree->Branch("norm_z", &norm_z, "norm_z/D");
  tTree->Branch("part_id", &part_id, "part_id/I") ;  
 }
 
@@ -564,6 +568,12 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
   G4double x = pos.x();
   G4double y = pos.y();
   G4double z = pos.z();
+  G4ThreeVector normal;
+  normal = track->GetVolume()->GetLogicalVolume()->GetSolid()->SurfaceNormal(pos);
+  G4double nx = normal.x();
+  G4double ny = normal.y();
+  G4double nz = normal.z();
+
   G4double posrad = pow( (pow(x,2) + pow(y,2) ),0.5) ;
 
   G4ThreeVector vertex = track->GetVertexPosition();
@@ -581,6 +591,9 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
   leak_x = x/CLHEP::cm;
   leak_y = y/CLHEP::cm;
   leak_z = z/CLHEP::cm;
+  norm_x = nx/CLHEP::cm;
+  norm_y = ny/CLHEP::cm;
+  norm_z = nz/CLHEP::cm;
   part_id=pd->GetPDGEncoding();
   theta = momentum.theta();
   G4bool isLeaking = false;
@@ -651,6 +664,8 @@ void HistoManager::SetTargetMaterial(const G4Material* mat)
 {
   if(mat) {
     material = mat;
+    density = material->GetDensity()/(CLHEP::g/CLHEP::cm3); // density in g/cm3
+    G4cout << "Density =" << density << G4endl;
     elm = (*(material->GetElementVector()))[0];
   }
 }
@@ -664,11 +679,18 @@ void HistoManager::SetWindowMaterial(const G4Material* mat)
 }
 void HistoManager::SetFileName(const char* val2)        
 {
-  sprintf(defaultname,"%s",val2); 
-  G4int startSeed = CLHEP::HepRandom::getTheSeed(); 
-  sprintf(defaultname,"%s_%i.root",defaultname,startSeed);
-  strcpy(fOutName, defaultname);
-  printf("output file set as %s\n", fOutName);
+  sprintf(defaultname,"%s",val2);
+  std::string s(val2);
+  if (s.find(".root")<s.length()) { // single file output
+    strcpy(fOutName, defaultname);
+    printf("output file set as %s\n", fOutName);
+  }
+  else { // multiple file output
+    G4int startSeed = CLHEP::HepRandom::getTheSeed(); 
+    sprintf(defaultname,"%s_%i.root",defaultname,startSeed);
+    strcpy(fOutName, defaultname);
+    printf("output file set as %s\n", fOutName);
+  }
   fOutfile = new TFile(fOutName, "RECREATE");
 
   

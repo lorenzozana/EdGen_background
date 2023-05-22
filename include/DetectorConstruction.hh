@@ -30,6 +30,12 @@ public:
   void SetWindowMaterial(const G4String&);
 
   void SetTargetRadius(G4double val);
+  void SetTargetLx(G4double val);
+  void SetTargetLy(G4double val);
+  void SetTargetLz(G4double val);
+  void SetWindowLx(G4double val);
+  void SetWindowLy(G4double val);
+  void SetWindowLz(G4double val);
 
   void UpdateGeometry();
 
@@ -39,6 +45,13 @@ private:
   DetectorConstruction(const DetectorConstruction&);
 
   G4double radius;
+  G4double targetlx;
+  G4double targetly;
+  G4double targetlz;
+  G4double windowlx;
+  G4double windowly;
+  G4double windowlz;
+
 
   G4Material*  targetMaterial;
   G4Material*  worldMaterial;

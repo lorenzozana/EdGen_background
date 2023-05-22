@@ -67,14 +67,67 @@ DetectorMessenger::DetectorMessenger(DetectorConstruction * Det)
   lCmd2->SetRange("wthick>0");
   lCmd2->AvailableForStates(G4State_PreInit,G4State_Idle);
 
+  lxtgCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/Length_tg_x",this);
+  lxtgCmd->SetGuidance("Set thickness in x of the target (1 side)");
+  lxtgCmd->SetParameterName("lxtg",false);
+  lxtgCmd->SetUnitCategory("Length");
+  lxtgCmd->SetRange("lxtg>0");
+  lxtgCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+  lytgCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/Length_tg_y",this);
+  lytgCmd->SetGuidance("Set thickness in y of the target (1 side)");
+  lytgCmd->SetParameterName("lytg",false);
+  lytgCmd->SetUnitCategory("Length");
+  lytgCmd->SetRange("lytg>0");
+  lytgCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+  lztgCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/Length_tg_z",this);
+  lztgCmd->SetGuidance("Set thickness in z of the target (1 side)");
+  lztgCmd->SetParameterName("lztg",false);
+  lztgCmd->SetUnitCategory("Length");
+  lztgCmd->SetRange("lztg>0");
+  lztgCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+  lxwdCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/Length_wd_x",this);
+  lxwdCmd->SetGuidance("Set thickness in x of the target (1 side)");
+  lxwdCmd->SetParameterName("lxwd",false);
+  lxwdCmd->SetUnitCategory("Length");
+  lxwdCmd->SetRange("lxwd>0");
+  lxwdCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+  lywdCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/Length_wd_y",this);
+  lywdCmd->SetGuidance("Set thickness in y of the target (1 side)");
+  lywdCmd->SetParameterName("lywd",false);
+  lywdCmd->SetUnitCategory("Length");
+  lywdCmd->SetRange("lywd>0");
+  lywdCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+  lzwdCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/Length_wd_z",this);
+  lzwdCmd->SetGuidance("Set thickness in z of the target (1 side)");
+  lzwdCmd->SetParameterName("lzwd",false);
+  lzwdCmd->SetUnitCategory("Length");
+  lzwdCmd->SetRange("lzwd>0");
+  lzwdCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
   bsizeCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/BeamSize",this);
   bsizeCmd->SetGuidance("Set Beam Size");
   bsizeCmd->SetParameterName("bsize",false);
   bsizeCmd->SetUnitCategory("Length");
   bsizeCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
+  blengthCmd = new G4UIcmdWithADoubleAndUnit("/testhadr/BeamLength",this);
+  blengthCmd->SetGuidance("Set Beam Length");
+  blengthCmd->SetParameterName("blength",false);
+  blengthCmd->SetUnitCategory("Length");
+  blengthCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+  vtypeCmd = new G4UIcmdWithAnInteger("/testhadr/VolumeType",this);
+  vtypeCmd->SetGuidance("Set Volume Type: 1 box; 2 tube");
+  vtypeCmd->SetParameterName("btype",false);
+  vtypeCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
   btypeCmd = new G4UIcmdWithAnInteger("/testhadr/BeamType",this);
-  btypeCmd->SetGuidance("Set Beam Type: 1 pencil; 2 gauss");
+  btypeCmd->SetGuidance("Set Beam Type: 1 pencil; 2 gauss; 3 flat in volume");
   btypeCmd->SetParameterName("btype",false);
   btypeCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
@@ -122,8 +175,16 @@ DetectorMessenger::~DetectorMessenger()
   delete lCmd;
   delete rCmd2;
   delete lCmd2;
+  delete lxtgCmd;
+  delete lytgCmd;
+  delete lztgCmd;
+  delete lxwdCmd;
+  delete lywdCmd;
+  delete lzwdCmd;
   delete bsizeCmd;
+  delete blengthCmd;
   delete btypeCmd;
+  delete vtypeCmd;
   delete nOfAbsCmd;
   delete updateCmd;
   delete testDir;
@@ -153,10 +214,26 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     h->SetWindowThick_r(rCmd2->GetNewDoubleValue(newValue));
   else if( command == lCmd2 ) 
     h->SetWindowThick_z(lCmd2->GetNewDoubleValue(newValue));
+  else if( command == lxtgCmd ) 
+    Detector->SetTargetLx(lxtgCmd->GetNewDoubleValue(newValue));
+  else if( command == lytgCmd ) 
+    Detector->SetTargetLy(lytgCmd->GetNewDoubleValue(newValue));
+  else if( command == lztgCmd ) 
+    Detector->SetTargetLz(lztgCmd->GetNewDoubleValue(newValue));
+  else if( command == lxwdCmd ) 
+    Detector->SetWindowLx(lxwdCmd->GetNewDoubleValue(newValue));
+  else if( command == lywdCmd ) 
+    Detector->SetWindowLy(lywdCmd->GetNewDoubleValue(newValue));
+  else if( command == lzwdCmd ) 
+    Detector->SetWindowLz(lzwdCmd->GetNewDoubleValue(newValue));
   else if( command == bsizeCmd ) 
     h->SetBeamSize(bsizeCmd->GetNewDoubleValue(newValue));
+  else if( command == blengthCmd ) 
+    h->SetBeamLength(blengthCmd->GetNewDoubleValue(newValue));
   else if( command == btypeCmd ) 
     h->SetBeamType(btypeCmd->GetNewIntValue(newValue));
+  else if( command == vtypeCmd ) 
+    h->SetVolumeType(btypeCmd->GetNewIntValue(newValue));
   else if( command == nOfAbsCmd ) 
     h->SetNumberOfSlices(nOfAbsCmd->GetNewIntValue(newValue));
   else if( command == binCmd ) 

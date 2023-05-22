@@ -10,6 +10,7 @@
 #include "TChain.h"
 #include "TString.h"
 #include "TH1F.h"
+#include "G4VSolid.hh"
 #include "G4UImessenger.hh"
 #include "G4UIdirectory.hh"
 #include "G4UIcommand.hh"
@@ -23,6 +24,7 @@
 
 class G4Track;
 class G4Step;
+//class G4VSolid;
 class G4ParticleDefinition;
 class G4UIcmdWithAString;
 class G4UIcmdWithAnInteger;
@@ -58,8 +60,10 @@ public:
   void AddLeakingParticle(const G4Track*);
 
   void SetTargetLength(G4double val)            {length  = val;};
+  void SetBeamLength(G4double val)              {beamlength  = val;};
   void SetBeamSize(G4double val)                {beamsize  = val;};
   void SetBeamType(G4int val)                   {beamtype  = val;};
+  void SetVolumeType(G4int val)                 {volumetype  = val;};
   void SetWindowThick_r(G4double val)           {thick_r  = val;};
   void SetWindowThick_z(G4double val)           {thick_z  = val;};
   void SetNumberOfSlices(G4int val)             {nSlices = val;};
@@ -67,7 +71,9 @@ public:
 
   G4double Length()         const               {return length;};
   G4double BeamSize()         const             {return beamsize;};
+  G4double BeamLength()         const           {return beamlength;};
   G4int    BeamType()         const             {return beamtype;};
+  G4int    VolumeType()         const           {return volumetype;};
   G4double Thick_r()         const              {return thick_r;};
   G4double Thick_z()         const              {return thick_z;};
   G4int    NumberOfSlices() const               {return nSlices;};
@@ -149,6 +155,7 @@ private:
   G4double beamEnergy;
   G4double length;
   G4double beamsize;
+  G4double beamlength;
   G4double radius;
   G4double thick_r;
   G4double thick_z;
@@ -163,6 +170,7 @@ private:
   G4int nSlices;
 
   G4int beamtype;
+  G4int volumetype;
   G4int n_evt;
   G4int n_elec;
   G4int n_posit;
@@ -205,7 +213,11 @@ private:
   double leak_x;
   double leak_y;
   double leak_z;
+  double norm_x;
+  double norm_y;
+  double norm_z;
   double mass;
+  double density;
   double neutron_ener;
   double neutron_theta;
   double en_sideleak_neut; //16

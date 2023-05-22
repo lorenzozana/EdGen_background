@@ -3,29 +3,30 @@
 /run/verbose 1
 /tracking/verbose 0
 #
-/testhadr/TargetMat        G4_W
-/testhadr/TargetRadius     10.0 cm
+/testhadr/TargetMat        G4_Al
+/testhadr/TargetRadius     5.0 cm
 /testhadr/TargetLength     40.0 cm
 /testhadr/WindowMat        G4_Galactic
 /testhadr/WindowThick_r    0.01 cm 
 /testhadr/WindowThick_z    0.012 cm
 /testhadr/NumberDivZ       1
-/testhadr/PrintModulo      100
+/testhadr/PrintModulo      1000
 /testhadr/Update
+/testhadr/VolumeType        2
 #/testhadr/CutsAll          0.7 mm
-#/testhadr/InChain          Photon
-#/testhadr/Infile           test_collimator_photon.root
+/testhadr/InChain          Full;1
+/testhadr/Infile           200MeV_22_in.root
 #/testhadr/Physics          PHYSLIST
 /testhadr/Physics          QGSP_BERT_HP
 #
 /run/initialize
 /testhadr/MaxEdep          10 GeV
 #
-/outputrec/FileName         Tungsten_photon_2112	
-/outputrec/Particle         1 2112			    
+/outputrec/FileName         box_200	
+/outputrec/Particle         1 22			    
 /gun/particle gamma
 #/random/setSeeds  1332361481 1332361481
-/gun/energy 8. GeV
+#/gun/energy 8. GeV
 #/gun/energy 40. GeV
-/run/beamOn 1000
+/run/beamOn 100000
 #

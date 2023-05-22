@@ -5,6 +5,7 @@
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleTable.hh"
 #include "globals.hh"
+#include "TF1.h"
 
 class G4ParticleGun;
 class HistoManager;
@@ -29,6 +30,7 @@ private:
   HistoManager*    histo; 
   G4ParticleTable* particleTable;
   G4double ener_p;
+  TF1 *frand;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
