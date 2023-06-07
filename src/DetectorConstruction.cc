@@ -3,6 +3,7 @@
 #include "DetectorMessenger.hh"
 
 #include "G4Tubs.hh"
+#include "G4Box.hh"
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 
@@ -86,7 +87,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   // World
   //
-  G4Tubs* solidW = new G4Tubs("World",0.,worldR,worldZ,0.,CLHEP::twopi);
+  // G4Tubs* solidW = new G4Tubs("World",0.,worldR,worldZ,0.,CLHEP::twopi);
+  G4Box* solidW = new G4Box("World",worldR,worldR,worldZ);
   logicWorld = new G4LogicalVolume( solidW,worldMaterial,"World");
   G4VPhysicalVolume* world = new G4PVPlacement(0,G4ThreeVector(),
                                        logicWorld,"World",0,false,0);
@@ -94,7 +96,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // Check volume
   //
 
-  G4Tubs* solidC = new G4Tubs("Check",0.,checkR,checkZ,0.,CLHEP::twopi);
+  //  G4Tubs* solidC = new G4Tubs("Check",0.,checkR,checkZ,0.,CLHEP::twopi);
+  G4Box* solidC =  new G4Box("Check",checkR,checkR,checkZ);
   logicCheck = new G4LogicalVolume( solidC,worldMaterial,"World");
   //  G4VPhysicalVolume* physC = 
   new G4PVPlacement(0,G4ThreeVector(),logicCheck,"World",logicWorld,false,0);
@@ -103,7 +106,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
   // Window volume
   //
-  G4Tubs* solidWindow = new G4Tubs("Window",0.,windowR,windowZ,0.,CLHEP::twopi);
+  // G4Tubs* solidWindow = new G4Tubs("Window",0.,windowR,windowZ,0.,CLHEP::twopi);
+  G4Box* solidWindow = new G4Box("Window",windowR,windowR,windowZ);
   logicWindow = new G4LogicalVolume( solidWindow,windowMaterial,"Window");
   new G4PVPlacement(0,G4ThreeVector(),logicWindow,"Window",logicCheck,false,0);
   logicWindow->SetSensitiveDetector(windowSD);
@@ -111,7 +115,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   // Target volume
   //
-  G4Tubs* solidA = new G4Tubs("Target",0.,radius,sliceZ,0.,CLHEP::twopi);
+  //  G4Tubs* solidA = new G4Tubs("Target",0.,radius,sliceZ,0.,CLHEP::twopi);
+  G4Box* solidA = new G4Box("Target",radius,radius,sliceZ);
   logicTarget = new G4LogicalVolume( solidA,targetMaterial,"Target");
   logicTarget->SetSensitiveDetector(targetSD);
 
