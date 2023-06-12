@@ -85,6 +85,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4int nSlices    = HistoManager::GetPointer()->NumberOfSlices();
   G4double sliceZ  = targetZ/G4double(nSlices);
+  if (vol_type == 1) {
+    sliceZ = targetlz/ G4double(nSlices);
+  }
 
   //
   // World
@@ -135,7 +138,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // Target volume
   //
   if (vol_type ==2 ) { 
-    G4Tubs* solidA = new G4Tubs("Target",0.,radius,sliceZ,0.,CLHEP::twopi);
+    G4Tubs* solidA = new G4Tubs("Target",0.,radius,targetZ,0.,CLHEP::twopi);
     logicTarget = new G4LogicalVolume( solidA,targetMaterial,"Target");
   }
   else { 
@@ -145,12 +148,21 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   logicTarget->SetSensitiveDetector(targetSD);
 
   G4double z = sliceZ - targetZ;
-
-  for(G4int i=0; i<nSlices; i++) {
-    // physC = 
-    new G4PVPlacement(0,G4ThreeVector(0.0,0.0,z),logicTarget,"Target",logicWindow,false,i);
-    z += 2.0*sliceZ;
+  new G4PVPlacement(0,G4ThreeVector(),logicTarget,"Target",logicWindow,false,0);
+  // for(G4int i=0; i<nSlices; i++) {
+  //   // physC = 
+  //   new G4PVPlacement(0,G4ThreeVector(0.0,0.0,z),logicTarget,"Target",logicWindow,false,i);
+  //   z += 2.0*sliceZ;
+  // }
+  if (vol_type ==1) {
+    G4cout << "window x= "<< windowlx/CLHEP::cm  << "cm" << G4endl;
+    G4cout << "window y= "<< windowly/CLHEP::cm  << "cm" << G4endl;
+    G4cout << "window z= "<< windowlz/CLHEP::cm  << "cm" << G4endl;
+    G4cout << "target x= "<< targetlx/CLHEP::cm  << "cm" << G4endl;
+    G4cout << "target y= "<< targetly/CLHEP::cm  << "cm" << G4endl;
+    G4cout << "target z= "<< targetlz/CLHEP::cm  << "cm" << G4endl;
   }
+      
   G4cout << "### Target consist of " << nSlices
          << " of " << targetMaterial->GetName() 
          << " disks with R(mm)= " << radius/CLHEP::mm
