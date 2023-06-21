@@ -37,8 +37,16 @@ private:
   G4UIcmdWithADoubleAndUnit* lCmd;
   G4UIcmdWithADoubleAndUnit* rCmd2;
   G4UIcmdWithADoubleAndUnit* lCmd2;
+  G4UIcmdWithADoubleAndUnit* lxtgCmd;
+  G4UIcmdWithADoubleAndUnit* lytgCmd;
+  G4UIcmdWithADoubleAndUnit* lztgCmd;
+  G4UIcmdWithADoubleAndUnit* lxwdCmd;
+  G4UIcmdWithADoubleAndUnit* lywdCmd;
+  G4UIcmdWithADoubleAndUnit* lzwdCmd;
   G4UIcmdWithADoubleAndUnit* bsizeCmd;
+  G4UIcmdWithADoubleAndUnit* blengthCmd;
   G4UIcmdWithAnInteger*      btypeCmd;
+  G4UIcmdWithAnInteger*      vtypeCmd;
   G4UIcmdWithADoubleAndUnit* edepCmd;
   G4UIcmdWithAnInteger*      binCmd;
   G4UIcmdWithAnInteger*      nOfAbsCmd;

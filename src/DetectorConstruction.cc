@@ -71,13 +71,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // Sizes
   G4double thickwindow_r = HistoManager::GetPointer()->Thick_r();
   G4double thickwindow_z = HistoManager::GetPointer()->Thick_z();
-  G4double checkR  = radius + thickwindow_r + CLHEP::mm;
-  G4double worldR  = radius + thickwindow_r + CLHEP::cm;
+  G4double checkR  = thickwindow_r + CLHEP::mm;
+  G4double worldR  = thickwindow_r + CLHEP::cm;
   G4double targetZ = HistoManager::GetPointer()->Length()*0.5; 
-  G4double checkZ  = targetZ + thickwindow_z + CLHEP::mm;
-  G4double worldZ  = targetZ + thickwindow_z + CLHEP::cm;
-  G4double windowZ  = targetZ + thickwindow_z;
-  G4double windowR  = radius + thickwindow_r;
+  G4double checkZ  = thickwindow_z + CLHEP::mm;
+  G4double worldZ  = thickwindow_z + CLHEP::cm;
+  G4double windowZ  = thickwindow_z;
+  G4double windowR  = thickwindow_r;
+
+  G4int vol_type = HistoManager::GetPointer()->VolumeType();
 
   G4cout << "worldZ=" << worldZ << " checkZ=" << checkZ << " windowZ=" <<windowZ << " targetZ=" << targetZ << G4endl;;
 
@@ -88,8 +90,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // World
   //
   // G4Tubs* solidW = new G4Tubs("World",0.,worldR,worldZ,0.,CLHEP::twopi);
-  G4Box* solidW = new G4Box("World",worldR,worldR,worldZ);
-  logicWorld = new G4LogicalVolume( solidW,worldMaterial,"World");
+  //  G4Box* solidW = new G4Box("World",worldR,worldR,worldZ);
+  //  logicWorld = new G4LogicalVolume( solidW,worldMaterial,"World");
+  if (vol_type ==2 ) {
+    G4Tubs* solidW = new G4Tubs("World",0.,worldR,worldZ,0.,CLHEP::twopi);
+    logicWorld = new G4LogicalVolume( solidW,worldMaterial,"World");
+  }
+  else {
+    G4Box* solidW = new G4Box("World",windowlx+CLHEP::cm,windowly+CLHEP::cm,windowlz+CLHEP::cm);
+    logicWorld = new G4LogicalVolume( solidW,worldMaterial,"World");
+  }
+
   G4VPhysicalVolume* world = new G4PVPlacement(0,G4ThreeVector(),
                                        logicWorld,"World",0,false,0);
   //
@@ -97,18 +108,31 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
 
   //  G4Tubs* solidC = new G4Tubs("Check",0.,checkR,checkZ,0.,CLHEP::twopi);
-  G4Box* solidC =  new G4Box("Check",checkR,checkR,checkZ);
-  logicCheck = new G4LogicalVolume( solidC,worldMaterial,"World");
-  //  G4VPhysicalVolume* physC = 
-  new G4PVPlacement(0,G4ThreeVector(),logicCheck,"World",logicWorld,false,0);
+  //  G4Box* solidC =  new G4Box("Check",checkR,checkR,checkZ);
+  if (vol_type ==2 ) {
+    G4Tubs* solidC = new G4Tubs("Check",0.,checkR,checkZ,0.,CLHEP::twopi);
+    logicCheck = new G4LogicalVolume( solidC,worldMaterial,"Check");
+  }
+  else {
+    G4Box* solidC = new G4Box("Check",windowlx+CLHEP::mm,windowly+CLHEP::mm,windowlz+CLHEP::mm);
+    logicCheck = new G4LogicalVolume( solidC,worldMaterial,"Check");
+  }
+  new G4PVPlacement(0,G4ThreeVector(),logicCheck,"Check",logicWorld,false,0);
   logicCheck->SetSensitiveDetector(checkSD);
 
  //
   // Window volume
   //
   // G4Tubs* solidWindow = new G4Tubs("Window",0.,windowR,windowZ,0.,CLHEP::twopi);
-  G4Box* solidWindow = new G4Box("Window",windowR,windowR,windowZ);
-  logicWindow = new G4LogicalVolume( solidWindow,windowMaterial,"Window");
+  //  G4Box* solidWindow = new G4Box("Window",windowR,windowR,windowZ);
+  if (vol_type ==2 ) { 
+    G4Tubs* solidWindow = new G4Tubs("Window",0.,windowR,windowZ,0.,CLHEP::twopi);
+    logicWindow = new G4LogicalVolume( solidWindow,windowMaterial,"Window");
+  }
+  else { 
+    G4Box* solidWindow = new G4Box("Window",windowlx,windowly,windowlz);
+    logicWindow = new G4LogicalVolume( solidWindow,windowMaterial,"Window");
+  }
   new G4PVPlacement(0,G4ThreeVector(),logicWindow,"Window",logicCheck,false,0);
   logicWindow->SetSensitiveDetector(windowSD);
 
@@ -116,17 +140,24 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // Target volume
   //
   //  G4Tubs* solidA = new G4Tubs("Target",0.,radius,sliceZ,0.,CLHEP::twopi);
-  G4Box* solidA = new G4Box("Target",radius,radius,sliceZ);
-  logicTarget = new G4LogicalVolume( solidA,targetMaterial,"Target");
+  //  G4Box* solidA = new G4Box("Target",radius,radius,sliceZ);
+  if (vol_type ==2 ) { 
+    G4Tubs* solidA = new G4Tubs("Target",0.,radius,targetZ,0.,CLHEP::twopi);
+    logicTarget = new G4LogicalVolume( solidA,targetMaterial,"Target");
+  }
+  else { 
+    G4Box* solidA = new G4Box("Target",targetlx,targetly,targetlz);
+    logicTarget = new G4LogicalVolume( solidA,targetMaterial,"Target");
+  }
+  new G4PVPlacement(0,G4ThreeVector(),logicTarget,"Target",logicWindow,false,0);
   logicTarget->SetSensitiveDetector(targetSD);
 
-  G4double z = sliceZ - targetZ;
 
-  for(G4int i=0; i<nSlices; i++) {
-    // physC = 
-    new G4PVPlacement(0,G4ThreeVector(0.0,0.0,z),logicTarget,"Target",logicWindow,false,i);
-    z += 2.0*sliceZ;
-  }
+  // for(G4int i=0; i<nSlices; i++) {
+  //   // physC = 
+  //   new G4PVPlacement(0,G4ThreeVector(0.0,0.0,z),logicTarget,"Target",logicWindow,false,i);
+  //   z += 2.0*sliceZ;
+  // }
   G4cout << "### Target consist of " << nSlices
          << " of " << targetMaterial->GetName() 
          << " disks with R(mm)= " << radius/CLHEP::mm
@@ -308,6 +339,48 @@ void DetectorConstruction::SetTargetRadius(G4double val)
 {
   if(val > 0.0) {
     radius = val;
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+  } 
+}
+void DetectorConstruction::SetTargetLx(G4double val)  
+{
+  if(val > 0.0) {
+    targetlx = val/2;
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+  } 
+}
+void DetectorConstruction::SetTargetLy(G4double val)  
+{
+  if(val > 0.0) {
+    targetly = val/2;
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+  } 
+}
+void DetectorConstruction::SetTargetLz(G4double val)  
+{
+  if(val > 0.0) {
+    targetlz = val/2;
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+  } 
+}
+void DetectorConstruction::SetWindowLx(G4double val)  
+{
+  if(val > 0.0) {
+    windowlx = val/2;
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+  } 
+}
+void DetectorConstruction::SetWindowLy(G4double val)  
+{
+  if(val > 0.0) {
+    windowly = val/2;
+    G4RunManager::GetRunManager()->GeometryHasBeenModified();
+  } 
+}
+void DetectorConstruction::SetWindowLz(G4double val)  
+{
+  if(val > 0.0) {
+    windowlz = val/2;
     G4RunManager::GetRunManager()->GeometryHasBeenModified();
   } 
 }

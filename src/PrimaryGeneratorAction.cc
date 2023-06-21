@@ -50,8 +50,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       = particleTable->FindParticle(histo->GetPDGEncoding());
     particleGun->SetParticleDefinition(particle);
     particleGun->SetParticleMomentumDirection(G4ThreeVector(histo->GetInDirectionX(),histo->GetInDirectionY(),histo->GetInDirectionZ()));
-    ener_p=pow((pow(histo->GetInMomentum(),2)+pow(particle->GetPDGMass(),2)),0.5);
-    particleGun->SetParticleEnergy(ener_p);
+    ener_p=pow((pow(histo->GetInMomentum()*CLHEP::MeV,2)+pow(particle->GetPDGMass()*CLHEP::MeV,2)),0.5);
+    particleGun->SetParticleEnergy(ener_p*CLHEP::MeV);
     particleGun->SetParticlePosition(G4ThreeVector(histo->GetInVertexX(),histo->GetInVertexY(),histo->GetInVertexZ()));
     //    G4cout << "Generate new event momentum set to" << histo->GetInMomentum() << " dz=" << histo->GetInDirectionZ() << G4endl;
   }
