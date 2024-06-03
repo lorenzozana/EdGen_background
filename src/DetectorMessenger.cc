@@ -220,12 +220,18 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     Detector->SetTargetLy(lytgCmd->GetNewDoubleValue(newValue));
   else if( command == lztgCmd ) 
     Detector->SetTargetLz(lztgCmd->GetNewDoubleValue(newValue));
-  else if( command == lxwdCmd ) 
+  else if( command == lxwdCmd ) {
     Detector->SetWindowLx(lxwdCmd->GetNewDoubleValue(newValue));
-  else if( command == lywdCmd ) 
+    h->SetWindowLx(lxwdCmd->GetNewDoubleValue(newValue));
+  }
+  else if( command == lywdCmd ) {
     Detector->SetWindowLy(lywdCmd->GetNewDoubleValue(newValue));
-  else if( command == lzwdCmd ) 
+    h->SetWindowLy(lywdCmd->GetNewDoubleValue(newValue));
+  }
+  else if( command == lzwdCmd ) { 
     Detector->SetWindowLz(lzwdCmd->GetNewDoubleValue(newValue));
+    h->SetWindowLz(lzwdCmd->GetNewDoubleValue(newValue));
+  }
   else if( command == bsizeCmd ) 
     h->SetBeamSize(bsizeCmd->GetNewDoubleValue(newValue));
   else if( command == blengthCmd ) 

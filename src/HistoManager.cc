@@ -127,31 +127,31 @@ void HistoManager::bookHisto()
   fTree->Branch("en_leak_prot", &en_leak_prot, "en_leak_prot/D") ; //"18","log10 Energy (MeV) of leaking protons",nBinsE,-4.,6.,1.0);
   fTree->Branch("en_leak_chargpion", &en_leak_chargpion, "en_leak_chargpion/D") ; //"19","log10 Energy (MeV) of leaking charged pions",nBinsE,-4.,6.,1.0);
   fTree->Branch("en_deptg_beam", &en_deptg_beam, "en_deptg_beam/D") ; //"22","Energy deposition in the target normalized to beam energy",	      110,0.0,1.1,1.0);
-fTree->Branch("en_EMdeptg_beam", &en_EMdeptg_beam, "en_EMdeptg_beam/D") ; //23","EM energy deposition in the target normalized to beam energy",	    110,0.0,1.1,1.0);
-fTree->Branch("en_pideptg_beam", &en_pideptg_beam, "en_pideptg_beam/D") ; //24","Pion energy deposition in the target normalized to beam energy",	       110,0.0,1.1,1.0);
-fTree->Branch("en_protdeptg_beam", &en_protdeptg_beam, "en_protdeptg_beam/D") ; //25","Proton energy deposition in the target normalized to beam energy",	       110,0.0,1.1,1.0);
- fTree->Branch("en_depwd_beam", &en_depwd_beam, "en_depwd_beam/D") ; //"22","Energy deposition in the window normalized to beam energy",	      110,0.0,1.1,1.0);
-fTree->Branch("en_EMdepwd_beam", &en_EMdepwd_beam, "en_EMdepwd_beam/D") ; //23","EM energy deposition in the window normalized to beam energy",	    110,0.0,1.1,1.0);
-fTree->Branch("en_pidepwd_beam", &en_pidepwd_beam, "en_pidepwd_beam/D") ; //24","Pion energy deposition in the window normalized to beam energy",	       110,0.0,1.1,1.0);
-fTree->Branch("en_protdepwd_beam", &en_protdepwd_beam, "en_protdepwd_beam/D") ; //25","Proton energy deposition in the window normalized to beam energy",	       110,0.0,1.1,1.0);
- fTree->Branch("H1_Edep","TH1F",&H1_Edep,32000,0);
- fTree->Branch("H1_Egamma","TH1F",&H1_Egamma,32000,0);
- fTree->Branch("H1_Eelectron","TH1F",&H1_Eelectron,32000,0);
- fTree->Branch("H1_Epositron","TH1F",&H1_Epositron,32000,0);
- fTree->Branch("H1_Eneutron","TH1F",&H1_Eneutron,32000,0);
- fTree->Branch("H1_Eproton","TH1F",&H1_Eproton,32000,0);
- fTree->Branch("H1_Eantiproton","TH1F",&H1_Eantiproton,32000,0);
- fTree->Branch("H1_Epiplus","TH1F",&H1_Epiplus,32000,0);
- fTree->Branch("H1_Epiminus","TH1F",&H1_Epiminus,32000,0);
- fTree->Branch("H1_Epi0","TH1F",&H1_Epi0,32000,0);
- fTree->Branch("H1_Ekaons","TH1F",&H1_Ekaons,32000,0);
- fTree->Branch("H1_Emuons","TH1F",&H1_Emuons,32000,0);
- fTree->Branch("H1_Edeuterons","TH1F",&H1_Edeuterons,32000,0);
- fTree->Branch("H1_Etriton","TH1F",&H1_Etriton,32000,0);
- fTree->Branch("H1_EHe3","TH1F",&H1_EHe3,32000,0);
- fTree->Branch("H1_Ealpha","TH1F",&H1_Ealpha,32000,0);
- fTree->Branch("H1_Efwdneutron","TH1F",&H1_Efwdneutron,32000,0);
- fTree->Branch("H1_Ebwdneutron","TH1F",&H1_Ebwdneutron,32000,0);
+  fTree->Branch("en_EMdeptg_beam", &en_EMdeptg_beam, "en_EMdeptg_beam/D") ; //23","EM energy deposition in the target normalized to beam energy",	    110,0.0,1.1,1.0);
+  fTree->Branch("en_pideptg_beam", &en_pideptg_beam, "en_pideptg_beam/D") ; //24","Pion energy deposition in the target normalized to beam energy",	       110,0.0,1.1,1.0);
+  fTree->Branch("en_protdeptg_beam", &en_protdeptg_beam, "en_protdeptg_beam/D") ; //25","Proton energy deposition in the target normalized to beam energy",	       110,0.0,1.1,1.0);
+  fTree->Branch("en_depwd_beam", &en_depwd_beam, "en_depwd_beam/D") ; //"22","Energy deposition in the window normalized to beam energy",	      110,0.0,1.1,1.0);
+  fTree->Branch("en_EMdepwd_beam", &en_EMdepwd_beam, "en_EMdepwd_beam/D") ; //23","EM energy deposition in the window normalized to beam energy",	    110,0.0,1.1,1.0);
+  fTree->Branch("en_pidepwd_beam", &en_pidepwd_beam, "en_pidepwd_beam/D") ; //24","Pion energy deposition in the window normalized to beam energy",	       110,0.0,1.1,1.0);
+  fTree->Branch("en_protdepwd_beam", &en_protdepwd_beam, "en_protdepwd_beam/D") ; //25","Proton energy deposition in the window normalized to beam energy",	       110,0.0,1.1,1.0);
+  fTree->Branch("H1_Edep","TH1F",&H1_Edep,32000,0);
+  fTree->Branch("H1_Egamma","TH1F",&H1_Egamma,32000,0);
+  fTree->Branch("H1_Eelectron","TH1F",&H1_Eelectron,32000,0);
+  fTree->Branch("H1_Epositron","TH1F",&H1_Epositron,32000,0);
+  fTree->Branch("H1_Eneutron","TH1F",&H1_Eneutron,32000,0);
+  fTree->Branch("H1_Eproton","TH1F",&H1_Eproton,32000,0);
+  fTree->Branch("H1_Eantiproton","TH1F",&H1_Eantiproton,32000,0);
+  fTree->Branch("H1_Epiplus","TH1F",&H1_Epiplus,32000,0);
+  fTree->Branch("H1_Epiminus","TH1F",&H1_Epiminus,32000,0);
+  fTree->Branch("H1_Epi0","TH1F",&H1_Epi0,32000,0);
+  fTree->Branch("H1_Ekaons","TH1F",&H1_Ekaons,32000,0);
+  fTree->Branch("H1_Emuons","TH1F",&H1_Emuons,32000,0);
+  fTree->Branch("H1_Edeuterons","TH1F",&H1_Edeuterons,32000,0);
+  fTree->Branch("H1_Etriton","TH1F",&H1_Etriton,32000,0);
+  fTree->Branch("H1_EHe3","TH1F",&H1_EHe3,32000,0);
+  fTree->Branch("H1_Ealpha","TH1F",&H1_Ealpha,32000,0);
+  fTree->Branch("H1_Efwdneutron","TH1F",&H1_Efwdneutron,32000,0);
+  fTree->Branch("H1_Ebwdneutron","TH1F",&H1_Ebwdneutron,32000,0);
 
 
 
@@ -191,6 +191,8 @@ fTree->Branch("en_protdepwd_beam", &en_protdepwd_beam, "en_protdepwd_beam/D") ; 
 
 void HistoManager::BeginOfRun()
 {
+
+  G4cout << "windowLx= "<< windowLx << "   windowLy=" << windowLy << "   windowLz=" << windowLz << G4endl; 
   full_r      = radius + thick_r;
   full_z      = 0.5*length + thick_z;
   absZ0       = -0.5*length;
@@ -597,8 +599,13 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
   theta = momentum.theta();
   G4bool isLeaking = false;
 
+  //  G4int vol_type = volumetype 2=tube, 1=box;
+  // windowR = thick_r
+  // windowZ = thick_z
+
+
   // Forward 
-  if(z > full_z && dir.z() > 0.0) {
+  if(volumetype == 2 && z > full_z && dir.z() > 0.0) {
     isLeaking = true;
     if(pd == neutron) {
       ++n_neu_forw;
@@ -610,7 +617,7 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
     } else isLeaking = true;
 
     // Backward
-  } else if (z < -full_z && dir.z() < 0.0) {
+  } else if (volumetype == 2 && z < -full_z && dir.z() < 0.0) {
     isLeaking = true;
     if(pd == neutron) {
       ++n_neu_back;
@@ -622,7 +629,8 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
     } else isLeaking = true;
 
     // Side
-  } else if (std::abs(z) <= full_z &&posrad > full_r  && x*dir.x() + y*dir.y() > 0.0) {
+  } 
+  else if (volumetype == 2 && std::abs(z) <= full_z &&posrad > thick_r  && x*dir.x() + y*dir.y() > 0.0) { // tube
     isLeaking = true;
     if(pd == neutron) {
       ++n_neu_leak;
@@ -633,6 +641,41 @@ void HistoManager::AddLeakingParticle(const G4Track* track)
       // nTree->Fill();
     } else isLeaking = true;
   }
+  
+  else if (volumetype == 1 && std::abs(z) <= windowLz && std::abs(y) <= windowLy  && std::abs(x)>windowLx  && x*dir.x() > 0.0) { // box x direction
+    isLeaking = true;
+    if(pd == neutron) {
+      ++n_neu_leak;
+      en_sideleak_neut = e;
+      H1_Eneutron->Fill(e);
+      // neutron_theta = momentum.theta();
+      // neutron_ener = ener;
+      // nTree->Fill();
+    } else isLeaking = true;
+  }
+  else if (volumetype == 1 && std::abs(z) <= windowLz && std::abs(x) <= windowLx  && std::abs(y)>windowLy  && y*dir.y() > 0.0) { // box y direction
+    isLeaking = true;
+    if(pd == neutron) {
+      ++n_neu_leak;
+      en_sideleak_neut = e;
+      H1_Eneutron->Fill(e);
+      // neutron_theta = momentum.theta();
+      // neutron_ener = ener;
+      // nTree->Fill();
+    } else isLeaking = true;
+  }
+  else if (volumetype == 1 && std::abs(x) <= windowLx && std::abs(y) <= windowLy  && std::abs(z)>windowLz  && z*dir.z() > 0.0) { // box z direction
+    isLeaking = true;
+    if(pd == neutron) {
+      ++n_neu_leak;
+      en_sideleak_neut = e;
+      H1_Eneutron->Fill(e);
+      // neutron_theta = momentum.theta();
+      // neutron_ener = ener;
+      // nTree->Fill();
+    } else isLeaking = true;
+  }
+
 
   // protons and pions
   if(isLeaking) {

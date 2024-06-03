@@ -67,6 +67,9 @@ public:
   void SetWindowThick_z(G4double val)           {thick_z  = val;};
   void SetNumberOfSlices(G4int val)             {nSlices = val;};
   void SetNumberOfBinsE(G4int val)              {nBinsE  = val;};
+  void SetWindowLx(G4double val)                {windowLx = val/2;};
+  void SetWindowLy(G4double val)                {windowLy = val/2;};
+  void SetWindowLz(G4double val)                {windowLz = val/2;};
 
   G4double Length()         const               {return length;};
   G4double BeamSize()         const             {return beamsize;};
@@ -163,6 +166,9 @@ private:
   G4double full_z;
   G4double primaryKineticEnergy;
   G4double currentKinEnergy;
+  G4double windowLx;
+  G4double windowLy;
+  G4double windowLz;
  
   G4int verbose;
   G4int nBinsE;
