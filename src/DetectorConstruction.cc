@@ -197,6 +197,12 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   // G4double press = 2.116*atmosphere;
   G4int nComponents;
   G4int nIso;
+
+  G4Element* elCs = new G4Element("Cesium",  "Cs", Z=55., A= 132.90543*g/mole);
+  G4Material* Caesium = new G4Material( "Caesium",  density =1.886*CLHEP::g/CLHEP::cm3, nComponents=1 );                                                                                                                                                                                                         
+  Caesium->AddElement( elCs, 100.0*CLHEP::perCent );
+
+
   D  = new G4Isotope("Deuteron", zz=1, nn=2, aa= 2.0141018*CLHEP::g/CLHEP::mole);
   elD = new G4Element("Deuterium",symbol="elD", nIso = 1);
   elD->AddIsotope(D, abundance=100.*CLHEP::perCent);
