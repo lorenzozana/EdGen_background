@@ -165,10 +165,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
          << "  Total Length(mm)= " << 2.0*targetZ/CLHEP::mm
          <<  "  ###" << G4endl;
 
-  G4VisAttributes zero = G4VisAttributes::Invisible;
-  logicWorld->SetVisAttributes(&zero);
+  //  G4VisAttributes zero = G4VisAttributes::Invisible;
+  //  logicWorld->SetVisAttributes(&zero);
 
-  //  logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
+  logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
 
   G4VisAttributes regWcolor(G4Colour(0.3, 0.3, 0.3));
   logicCheck->SetVisAttributes(&regWcolor);
@@ -198,7 +198,7 @@ void DetectorConstruction::SetTargetMaterial(const G4String& mat)
   G4int nComponents;
   G4int nIso;
 
-  G4Element* elCs = new G4Element("Cesium",  "Cs", Z=55., A= 132.90543*g/mole);
+  G4Element* elCs = new G4Element("Cesium",  "Cs", zz=55, aa= 132.90543*CLHEP::g/CLHEP::mole);
   G4Material* Caesium = new G4Material( "Caesium",  density =1.886*CLHEP::g/CLHEP::cm3, nComponents=1 );                                                                                                                                                                                                         
   Caesium->AddElement( elCs, 100.0*CLHEP::perCent );
 
